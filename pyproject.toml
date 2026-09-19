@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cognimesh"
+version = "1.0.0"
+description = "Dual-Process Cognitive Architecture & Diagnostic Research Sandbox for Autonomous LLM Agents"
+readme = "README.md"
+authors = [
+  { name = "Sadman Arian", email = "msadmanarian@gmail.com" }
+]
+license = { text = "MIT" }
+keywords = ["ai-agents", "cognitive-architecture", "llm-benchmarking", "multi-agent-systems", "metacognition", "tree-of-thoughts"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.14",
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0.0",
+]
+real_llms = [
+  "openai>=1.0.0",
+  "anthropic>=0.18.0",
+  "google-generativeai>=0.4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/msadmanarian/Agent-Research"
+Repository = "https://github.com/msadmanarian/Agent-Research.git"
+
+[project.scripts]
+cognimesh = "agent_research.cli:main"

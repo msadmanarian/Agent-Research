@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CogniMesh — Autonomous Agent Cognitive Architecture & Research Sandbox</title>
+  <meta name="description" content="An academic research framework, diagnostic benchmark suite, and interactive visual laboratory for studying dual-process LLM agent cognition, memory consolidation, and dialectical consensus.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <!-- Background Glow Accents -->
+  <div class="glow-orb orb-primary"></div>
+  <div class="glow-orb orb-secondary"></div>
+
+  <!-- Header & Navigation -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="logo-badge">
+        <span class="pulse-dot"></span>
+        <span class="logo-text">COGNIMESH</span>
+      </div>
+      <span class="tagline">Dual-Process Agent Cognitive Architecture & Research Suite</span>
+    </div>
+
+    <nav class="nav-tabs" role="tablist">
+      <button class="nav-tab active" id="tab-cognitive" data-target="panel-cognitive" role="tab">🧠 Cognitive Loop</button>
+      <button class="nav-tab" id="tab-graph" data-target="panel-graph" role="tab">🕸️ Knowledge Graph</button>
+      <button class="nav-tab" id="tab-debate" data-target="panel-debate" role="tab">⚔️ Dialectical Arena</button>
+      <button class="nav-tab" id="tab-benchmarks" data-target="panel-benchmarks" role="tab">📊 Benchmarks</button>
+      <button class="nav-tab" id="tab-paper" data-target="panel-paper" role="tab">📄 Research Paper</button>
+    </nav>
+
+    <div class="header-right">
+      <div class="status-pill" id="system-status-indicator">
+        <span class="status-indicator"></span>
+        <span class="status-label">Sim Engine: Nominal</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- TAB 1: COGNITIVE LOOP & TELEMETRY -->
+    <section class="panel active" id="panel-cognitive" role="tabpanel">
+      <div class="panel-header">
+        <h1>Autonomous Agent Cognitive Cycle</h1>
+        <p class="subtitle">Real-time telemetry of perception intake, System 1 reflex matching, metacognitive arbitration, and System 2 Tree-of-Thoughts.</p>
+      </div>
+
+      <!-- Controls & Input -->
+      <div class="glass-card controller-card">
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="input-perception">Sensory Stimulus / Prompt:</label>
+            <input type="text" id="input-perception" value="Analyze network latency spike and recall fallback procedure" placeholder="Enter stimulus or environment event...">
+          </div>
+          <div class="form-group flex-2">
+            <label for="input-goal">Active Agent Goal:</label>
+            <input type="text" id="input-goal" value="Maintain 99.9% uptime and prevent catastrophic cascade failures">
+          </div>
+          <div class="form-group">
+            <label for="input-feedback">Simulate Environment Feedback:</label>
+            <select id="input-feedback">
+              <option value="Execution nominal: action applied smoothly.">Nominal (Success)</option>
+              <option value="ERROR: Database transaction timeout and deadlock.">Failure (Forces Reflection)</option>
+              <option value="Warning: Ambiguous parameter encountered.">Ambiguous (Triggers Drift Check)</option>
+            </select>
+          </div>
+          <div class="form-action">
+            <button class="btn btn-primary" id="btn-run-step">
+              <span class="btn-icon">⚡</span> Execute Cycle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Cycle Telemetry Grid -->
+      <div class="grid-layout cols-3">
+        <!-- Working Memory Buffer -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>Working Memory (7±2 Bounded)</h3>
+            <span class="badge" id="wm-count-badge">0 / 7</span>
+          </div>
+          <p class="card-desc">Items prioritized by dynamic attentional salience.</p>
+          <ul class="memory-list" id="working-memory-list">
+            <li class="empty-state">No items in active buffer. Click 'Execute Cycle'.</li>
+          </ul>
+        </div>
+
+        <!-- Metacognitive Arbitration -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>Metacognitive Arbitration</h3>
+            <span class="badge badge-mode" id="mode-badge">Standby</span>
+          </div>
+          <p class="card-desc">Evaluates epistemic uncertainty to invoke System 1 vs 2.</p>
+          <div class="arbitration-body">
+            <div class="metric-row">
+              <span>System 1 Heuristic Confidence:</span>
+              <span class="metric-val" id="metric-s1">-</span>
+            </div>
+            <div class="progress-track"><div class="progress-bar" id="bar-s1" style="width: 0%"></div></div>
+
+            <div class="metric-row">
+              <span>Epistemic Uncertainty:</span>
+              <span class="metric-val" id="metric-uncertainty">-</span>
+            </div>
+            <div class="progress-track"><div class="progress-bar progress-alert" id="bar-uncertainty" style="width: 0%"></div></div>
+
+            <div class="arbitration-reason" id="arbitration-reason">
+              Awaiting execution step...
+            </div>
+          </div>
+        </div>
+
+        <!-- Reflexion & Distilled Rules -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>Metacognitive Reflexion</h3>
+            <span class="badge badge-accent" id="reflection-status">Pending</span>
+          </div>
+          <p class="card-desc">Counterfactual reasoning and learned heuristic rules.</p>
+          <div class="reflection-box" id="reflection-box">
+            <p class="reflection-empty">Execution post-mortem will appear here.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Execution Trace Output -->
+      <div class="glass-card trace-card">
+        <div class="card-header">
+          <h3>Latest Action Decision & Rationale</h3>
+          <span class="badge" id="cycle-latency">Latency: -</span>
+        </div>
+        <div class="trace-content" id="action-trace-content">
+          <p class="empty-state">Trigger a cycle above to observe the decision rationale and System 2 search depth.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: SEMANTIC KNOWLEDGE GRAPH -->
+    <section class="panel" id="panel-graph" role="tabpanel">
+      <div class="panel-header">
+        <h1>Associative Semantic Knowledge Graph</h1>
+        <p class="subtitle">Interactive force-directed visualization of consolidated declarative concepts, relational edges, and spreading activation.</p>
+      </div>
+
+      <div class="glass-card graph-canvas-container">
+        <div class="canvas-controls">
+          <button class="btn btn-sm" id="btn-refresh-graph">🔄 Reload Topology</button>
+          <button class="btn btn-sm" id="btn-activate-nodes">⚡ Spread Activation</button>
+          <span class="graph-legend">
+            <span class="legend-dot dot-cognitive"></span> Cognitive
+            <span class="legend-dot dot-memory"></span> Memory
+            <span class="legend-dot dot-reasoning"></span> Reasoning
+            <span class="legend-dot dot-multiagent"></span> Multi-Agent
+          </span>
+        </div>
+        <canvas id="knowledgeGraphCanvas" width="980" height="520"></canvas>
+      </div>
+    </section>
+
+    <!-- TAB 3: DIALECTICAL MULTI-AGENT ARENA -->
+    <section class="panel" id="panel-debate" role="tabpanel">
+      <div class="panel-header">
+        <h1>Dialectical Multi-Agent Consensus Arena</h1>
+        <p class="subtitle">Structured Thesis-Antithesis-Synthesis debate resolving complex cognitive questions while defending against sycophantic drift.</p>
+      </div>
+
+      <div class="glass-card controller-card">
+        <div class="form-row">
+          <div class="form-group flex-3">
+            <label for="input-debate-topic">Debate Topic / Research Hypothesis:</label>
+            <input type="text" id="input-debate-topic" value="Decoupled Epistemic Memory vs Pure Autoregressive Context Window in LLM Agents">
+          </div>
+          <div class="form-group">
+            <label for="input-debate-rounds">Dialectical Rounds:</label>
+            <select id="input-debate-rounds">
+              <option value="3">3 Rounds (Standard)</option>
+              <option value="4">4 Rounds (Extended)</option>
+            </select>
+          </div>
+          <div class="form-action">
+            <button class="btn btn-primary" id="btn-start-debate">
+              <span class="btn-icon">⚔️</span> Convene Arena
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Debate Arena Display -->
+      <div class="grid-layout cols-3">
+        <!-- Message Stream -->
+        <div class="glass-card flex-2 message-stream-card">
+          <div class="card-header">
+            <h3>Dialectical Transcript</h3>
+            <span class="badge" id="debate-turn-badge">0 Statements</span>
+          </div>
+          <div class="debate-messages" id="debate-messages-container">
+            <p class="empty-state">Select a topic and click 'Convene Arena' to begin multi-agent dialectic.</p>
+          </div>
+        </div>
+
+        <!-- Consensus Telemetry -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>Consensus Metrics</h3>
+          </div>
+          <div class="consensus-metrics-body">
+            <div class="metric-block">
+              <span class="metric-title">Sycophancy Resistance Index:</span>
+              <div class="metric-score" id="metric-sycophancy">-</div>
+              <p class="metric-note">Measures agent willingness to defend empirical ground truth against majority pressure.</p>
+            </div>
+
+            <div class="metric-block">
+              <span class="metric-title">Hegelian Synthesis Resolution:</span>
+              <div class="synthesis-box" id="synthesis-box">
+                Awaiting debate conclusion...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: DIAGNOSTIC BENCHMARKS -->
+    <section class="panel" id="panel-benchmarks" role="tabpanel">
+      <div class="panel-header">
+        <h1>Diagnostic Benchmark Suite</h1>
+        <p class="subtitle">Automated evaluation across 5 critical dimensions: Memory Fidelity, Counterfactual Error Recovery, Sycophancy Resistance, Tool Fault Tolerance, and Cognitive Drift.</p>
+      </div>
+
+      <div class="glass-card controller-card">
+        <div class="flex-between">
+          <div>
+            <h3 style="margin-bottom: 4px;">Run Full Diagnostic Battery</h3>
+            <p class="card-desc" style="margin: 0;">Executes simulated stress tests and computes the Composite Diagnostic Index.</p>
+          </div>
+          <button class="btn btn-primary" id="btn-run-benchmarks">
+            <span class="btn-icon">🚀</span> Run All Benchmarks
+          </button>
+        </div>
+      </div>
+
+      <div class="grid-layout cols-2">
+        <!-- Radar Chart Visualizer -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>Cognitive Capability Radar</h3>
+            <span class="badge badge-accent" id="composite-score-badge">Index: -</span>
+          </div>
+          <div class="canvas-radar-box">
+            <canvas id="radarChartCanvas" width="440" height="380"></canvas>
+          </div>
+        </div>
+
+        <!-- Detailed Results Table -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>Diagnostic Tasks Breakdown</h3>
+            <span class="badge" id="tasks-passed-badge">Passed: -</span>
+          </div>
+          <div class="table-container">
+            <table class="benchmark-table">
+              <thead>
+                <tr>
+                  <th>Task Dimension</th>
+                  <th>Category</th>
+                  <th>Score</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="benchmark-table-body">
+                <tr>
+                  <td colspan="4" class="empty-state">Click 'Run All Benchmarks' to begin diagnostic battery.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: RESEARCH PAPER & CITATION -->
+    <section class="panel" id="panel-paper" role="tabpanel">
+      <div class="panel-header">
+        <h1>Research White Paper & Specifications</h1>
+        <p class="subtitle">Theoretical foundations, mathematical formulations, and formal citations for CogniMesh.</p>
+      </div>
+
+      <div class="glass-card paper-card">
+        <div class="paper-header-box">
+          <span class="paper-badge">ACADEMIC SPECIFICATION</span>
+          <h2>CogniMesh: A Dual-Process Cognitive Architecture and Diagnostic Benchmark Sandbox for Autonomous Agents</h2>
+          <p class="paper-authors">Sadman Arian &bull; Independent Agentic AI Research &bull; 2026</p>
+        </div>
+
+        <div class="paper-abstract">
+          <strong>Abstract:</strong> Autonomous LLM-based agent systems often suffer from acute cognitive myopia, memory retrieval pollution, catastrophic drift in long-horizon planning, and sycophantic collapse in multi-agent collaboration. We introduce <em>CogniMesh</em>, a dual-process cognitive architecture inspired by Kahneman's System 1 (fast heuristic reflexes) and System 2 (deliberative Tree-of-Thoughts search), coupled with a tri-layer epistemic memory system and metacognitive arbitration. Through a diagnostic suite of five targeted stress tests, we demonstrate that epistemic-gated deliberation reduces compute latency while retaining 96.4% goal preservation and counterfactual recovery.
+        </div>
+
+        <div class="paper-section">
+          <h3>1. Mathematical Formulations</h3>
+          <p><strong>Episodic Decay Scoring:</strong></p>
+          <pre class="code-block">Score(e, q, t) = w_r &bull; exp(-&lambda; &Delta;t) + w_i &bull; Salience(e) + w_s &bull; CosineSim(q, e)</pre>
+          <p><strong>Metacognitive Epistemic Uncertainty:</strong></p>
+          <pre class="code-block">U_epistemic = (1.0 - C_heuristic) &bull; &alpha; + Novelty &bull; &beta;</pre>
+          <p><strong>Sycophancy Susceptibility Index:</strong></p>
+          <pre class="code-block">&sigma;_sycophancy = (Stance_final - Stance_initial) / (Peer_stance - Stance_initial)</pre>
+        </div>
+
+        <div class="paper-section">
+          <h3>2. BibTeX Citation</h3>
+          <div class="bibtex-container">
+            <pre id="bibtex-block">@software{arian2026cognimesh,
+  author = {Arian, Sadman},
+  title = {CogniMesh: Dual-Process Cognitive Architecture & Diagnostic Research Sandbox for Autonomous Agents},
+  year = {2026},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/msadmanarian/Agent-Research}}
+}</pre>
+            <button class="btn btn-sm" id="btn-copy-bibtex">📋 Copy BibTeX</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <span>CogniMesh Research Framework &bull; Open Source under MIT License</span>
+      <a href="https://github.com/msadmanarian/Agent-Research" target="_blank" rel="noopener noreferrer" class="footer-link">
+        GitHub: msadmanarian/Agent-Research
+      </a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
